@@ -8,6 +8,8 @@ import { useState, useEffect } from 'react';
 import axios from 'axios';
 import { Routes, Route, useLocation, useNavigate } from 'react-router-dom';
 
+const URL_BASE = 'https://be-a-rym.up.railway.app/api/character';
+const API_KEY = '1cfff7d1d18d.0db22fcc014bfd364d71';
 
 function App() {
   const [access, setAccess] = useState(false);
@@ -28,11 +30,11 @@ function App() {
   useEffect(() => {
     !access && navigate('/');
   }, [access]);
-  
+
   const [characters, setCharacters] = useState([]);
 
   const onSearch = (id) => {
-    axios(`https://rickandmortyapi.com/api/character/${id}`)
+    axios(`${URL_BASE}/${id}?key=${API_KEY}`)
       .then(({ data }) => {
         if (data.name) {
           setCharacters((oldChars) => [...oldChars, data]);
@@ -48,12 +50,12 @@ function App() {
   };
 
   const location = useLocation();
-  
+
   return (
     <div className='App'>
 
       {location.pathname !== '/'
-        && <Nav onSearch={onSearch} logout={logout}/>}
+        && <Nav onSearch={onSearch} logout={logout} />}
       <Routes>
         <Route path='/' element={<Form login={login} />} />
         <Route path='/home' element={<Cards characters={characters} onClose={onClose} />} />
