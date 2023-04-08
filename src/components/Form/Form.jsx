@@ -1,6 +1,6 @@
 import { useState } from "react";
 import validate from "./validation";
-import './Form.css'
+import { Button, P, LoginForm, Input, Label, Container } from "./styledForm";
 
 const Form = ({ login }) => {
   const [userData, setUserData] = useState({
@@ -31,41 +31,42 @@ const Form = ({ login }) => {
   };
 
   return (
-    <form
-      className="component-login"
-      onSubmit={handleSubmit}>
+    <Container>
+      <h2>Login page</h2>
+      <LoginForm
+        onSubmit={handleSubmit}>
 
-      <label htmlFor="email">Email:</label>
-      <input
-        name="email"
-        type="text"
-        placeholder="Escribi tu email..."
-        value={userData.email}
-        onChange={handleChange}
-        className={errors.email && 'warning'}
-      />
-      {errors.email &&
-        <p className="danger">{errors.email}</p>}
+        <Label htmlFor="email">Email:</Label>
+        <Input
+          name="email"
+          type="text"
+          placeholder="Escribi tu email..."
+          value={userData.email}
+          onChange={handleChange}
+          isWarning={errors.email && true}
+        />
 
-      <label htmlFor="password">Password:</label>
-      <input
-        name="password"
-        type="text"
-        placeholder="Escribi tu password..."
-        value={userData.password}
-        onChange={handleChange}
-        className={errors.password && 'warning'}
-      />
-      {errors.password &&
-        <p className="danger">{errors.password}</p>}
-
-      <br />
-      <button
-        type="submit"
-        disabled={errors.password || errors.email?true:false}>
-        Submit
-      </button>
-    </form>
+        <Label htmlFor="password">Password:</Label>
+        <Input
+          name="password"
+          type="password"
+          placeholder="Escribi tu password..."
+          value={userData.password}
+          onChange={handleChange}
+          isWarning={errors.password && true}
+        />
+        {errors.email &&
+          <P isError>{errors.email}</P>}
+        {errors.password &&
+          <P isError>{errors.password}</P>}
+        <br />
+        <Button
+          type="submit"
+          disabled={errors.password || errors.email}>
+          Submit!
+        </Button>
+      </LoginForm>
+    </Container>
   )
 };
 

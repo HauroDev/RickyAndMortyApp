@@ -2,13 +2,17 @@ import axios from "axios";
 import { useParams } from "react-router-dom";
 import { useState, useEffect } from "react";
 
+const URL_BASE = 'https://be-a-rym.up.railway.app/api/character';
+const API_KEY = '1cfff7d1d18d.0db22fcc014bfd364d71';
+
 const Detail = () => {
   const { id } = useParams();
 
   const [character, setCharacter] = useState({});
 
   useEffect(() => {
-    axios(`https://rickandmortyapi.com/api/character/${id}`).then(({ data }) => {
+    axios(`${URL_BASE}/${id}?key=${API_KEY}`)
+    .then(({ data }) => {
       if (data.name) {
         setCharacter(data);
       } else {
