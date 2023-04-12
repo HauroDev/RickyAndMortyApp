@@ -1,25 +1,16 @@
 import styled from "styled-components";
-import { NavLink } from "react-router-dom";
 
 const colorButtom = '#007bff';
 
-export const NavBar = styled.nav`
-  background-color: rgb(100,250,50);
-  display: flex;
-  justify-content: space-between;
-  height: 5em;
-`;
-
-export const NavLinkStyled = styled(NavLink)`
+export const Button = styled.button`
   display: inline-block;
-
   background-color: ${colorButtom};
   color: #fff;
   text-decoration: none;
   border: 2px solid ${colorButtom};
   border-radius: 5px;
   padding: 5px;
-  margin: 20px 20px;
+  margin: 20px;
   /* font-size: 16px; */
   cursor: pointer;
 
@@ -30,8 +21,15 @@ export const NavLinkStyled = styled(NavLink)`
   }
 `;
 
+export const Input = styled.input`
+  border-radius: 5px;
+  border-color: aqua;
+  padding: 5px;
+  margin: 20px;
+`;
+
 export const Container = styled.div`
-width: 20em;
+width: 30em;
 display: flex;
 flex-direction: row;
 justify-content: space-between;

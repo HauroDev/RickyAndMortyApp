@@ -45,19 +45,16 @@ export const Label = styled.label`
 `;
 
 export const LoginForm = styled.form`
-  display: flex;
+  display: inline-block;
   flex-direction: column;
   justify-content: center;
 `;
 
 export const Container = styled.div`
   display: flex;
-  transform: rotate(-15deg);
   flex-direction: column;
-  margin-top: 10em;
-  margin-left: 30em;
-  margin-right: 30em;
-  padding: 2em 3em 2em 3em;
+  margin: 10em;
+  padding: 2em 3em;
   border: solid;
   border-radius: 5px;
   background-color: white;

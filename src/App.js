@@ -1,5 +1,5 @@
 import './App.css';
-import Cards from './components/Cards.jsx';
+import Cards from './components/Cards/Cards';
 import Nav from './components/Nav/Nav';
 import About from './components/About';
 import Detail from './components/Detail';
@@ -8,6 +8,7 @@ import Error from './components/Error';
 import { useState, useEffect } from 'react';
 import axios from 'axios';
 import { Routes, Route, useLocation, useNavigate } from 'react-router-dom';
+import Favorites from './components/Favorites';
 
 const URL_BASE = 'https://be-a-rym.up.railway.app/api/character';
 const API_KEY = '1cfff7d1d18d.0db22fcc014bfd364d71';
@@ -49,7 +50,7 @@ function App() {
 
   const agregarRamdom = () => {
     let id = ramdom();
-    let Comparador = (character)=> character.id === id;
+    let Comparador = (character) => character.id === id;
 
     while (characters.find(Comparador)) {
       id = ramdom;
@@ -75,6 +76,7 @@ function App() {
         <Route path='/home' element={<Cards characters={characters} onClose={onClose} />} />
         <Route path='/about' element={<About />} />
         <Route path='/detail/:id' element={<Detail />} />
+        <Route path='/favorites' element={<Favorites />} />
         <Route path='*' element={Error} />
       </Routes>
     </div>

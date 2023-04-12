@@ -1,4 +1,5 @@
-import Card from './Card';
+import Card from '../Card/Card';
+import { Container } from './styledCards';
 
 export default function Cards(props) {
   const cardPersonajes = props.characters.map((prop) => {
@@ -16,5 +17,7 @@ export default function Cards(props) {
       />
     )
   })
-  return <div>{cardPersonajes}</div>;
+  return (<Container>
+    {cardPersonajes}
+  </Container>);
 }
