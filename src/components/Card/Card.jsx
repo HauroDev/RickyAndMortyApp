@@ -5,7 +5,7 @@ import { connect } from 'react-redux';
 import { useEffect, useState } from 'react';
 
 function Card({
-  id, name, status,
+  isOnClose, id, name, status,
   species, gender, origin,
   image, onClose, addFav,
   removeFav, myFavorites }) {
@@ -37,11 +37,11 @@ function Card({
   return (
     <Container>
       <FavButton onClick={handleFavorite}>{isFav ? '❤️' : '🤍'}</FavButton>
-      <CloseButton onClick={() => onClose(id)}>X</CloseButton>
+      {isOnClose && <CloseButton onClick={() => onClose(id)}>X</CloseButton>}
       <Link to={`/detail/${id}`}>
         <TextInfo>{name}</TextInfo>
       </Link>
-
+      <p>id: {id}</p>
       <ImageCharacter src={image} alt={name} />
     </Container>
   );

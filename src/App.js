@@ -9,6 +9,8 @@ import { useState, useEffect } from 'react';
 import axios from 'axios';
 import { Routes, Route, useLocation, useNavigate } from 'react-router-dom';
 import Favorites from './components/Favorites/Favorites';
+import { useDispatch } from 'react-redux';
+import { removeFav } from './redux/actions';
 
 const URL_BASE = 'https://be-a-rym.up.railway.app/api/character';
 const API_KEY = '1cfff7d1d18d.0db22fcc014bfd364d71';
@@ -64,9 +66,10 @@ function App() {
     onSearch(id);
   };
 
+  const dispatch = useDispatch();
   const onClose = (id) => {
     setCharacters(characters.filter((character) => character.id !== id));
-
+    dispatch(removeFav(id)); // no entiendo bien que pasa si elimino a un elemento que no esta en favoritos
   };
 
   return (

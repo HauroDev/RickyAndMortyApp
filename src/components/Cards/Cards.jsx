@@ -5,6 +5,7 @@ export default function Cards(props) {
   const cardPersonajes = props.characters.map((prop) => {
     return (
       <Card
+        isOnClose={true}
         key={prop.id}
         id={prop.id}
         name={prop.name}
