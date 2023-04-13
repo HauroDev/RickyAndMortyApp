@@ -1,4 +1,4 @@
-import './App.css';
+import { FlexContainer } from './styledApp';
 import Cards from './components/Cards/Cards';
 import Nav from './components/Nav/Nav';
 import About from './components/About';
@@ -8,7 +8,7 @@ import Error from './components/Error';
 import { useState, useEffect } from 'react';
 import axios from 'axios';
 import { Routes, Route, useLocation, useNavigate } from 'react-router-dom';
-import Favorites from './components/Favorites';
+import Favorites from './components/Favorites/Favorites';
 
 const URL_BASE = 'https://be-a-rym.up.railway.app/api/character';
 const API_KEY = '1cfff7d1d18d.0db22fcc014bfd364d71';
@@ -16,9 +16,16 @@ const max_characters = 826;
 const ramdom = () => Math.floor(Math.random() * (max_characters + 1));
 
 function App() {
-  const [access, setAccess] = useState(false);
-  const [EMAIL, PASSWORD] = ["hectorma208@gmail.com", "Hector12"];
+  const location = useLocation();
   const navigate = useNavigate();
+  const [access, setAccess] = useState(false);
+  const [characters, setCharacters] = useState([]);
+
+  useEffect(() => {
+    !access && navigate('/');
+  }, [access, navigate]);
+
+  const [EMAIL, PASSWORD] = ["hectorma208@gmail.com", "Hector12"];
   const login = (userData) => {
     if (userData.password === PASSWORD && userData.email === EMAIL) {
       setAccess(true);
@@ -28,12 +35,6 @@ function App() {
   const logout = () => {
     setAccess(false);
   };
-
-  useEffect(() => {
-    !access && navigate('/');
-  }, [access, navigate]);
-
-  const [characters, setCharacters] = useState([]);
 
   const onSearch = (id) => {
     axios(`${URL_BASE}/${id}?key=${API_KEY}`)
@@ -48,15 +49,19 @@ function App() {
       });
   }
 
-  const agregarRamdom = () => {
+  const agregarRamdom = (event, intentos = 0) => {
+
+    // esto funciona pero aun me falta ver que pasa con los favoritos,
+    // pero puede que esto lo arregle sin que me de cuenta
     let id = ramdom();
-    let Comparador = (character) => character.id === id;
-
-    while (characters.find(Comparador)) {
-      id = ramdom;
+    if (intentos > max_characters) {
+      alert(`Ya estan los ${max_characters} personajes`);
+      return null;
     }
+    if (characters.some(character => character.id.includes('' + id)))
+      return agregarRamdom(null, intentos + 1);
 
-    return onSearch(id);
+    onSearch(id);
   };
 
   const onClose = (id) => {
@@ -64,10 +69,8 @@ function App() {
 
   };
 
-  const location = useLocation();
-
   return (
-    <div className='App'>
+    <FlexContainer>
 
       {location.pathname !== '/'
         && <Nav ramdom={agregarRamdom} onSearch={onSearch} logout={logout} />}
@@ -79,7 +82,7 @@ function App() {
         <Route path='/favorites' element={<Favorites />} />
         <Route path='*' element={Error} />
       </Routes>
-    </div>
+    </FlexContainer>
   );
 }
 

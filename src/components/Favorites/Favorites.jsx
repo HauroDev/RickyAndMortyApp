@@ -1,9 +1,10 @@
-import Card from "./Card/Card";
+import Card from "../Card/Card";
 import { connect } from "react-redux";
+import { Container } from "./styledFavorites";
 
 const Favorites = ({ myFavorites }) => {
   return (
-    <>
+    <Container>
       {
         myFavorites?.map((character) => {
           return (<Card
@@ -13,10 +14,11 @@ const Favorites = ({ myFavorites }) => {
             species={character.species}
             gender={character.gender}
             origin={character.origin}
-            image={character.image}/>)
+            image={character.image} />)
         })
       }
-    </>)
+    </Container>
+  )
 }
 
 const mapStateToProps = (state) => {

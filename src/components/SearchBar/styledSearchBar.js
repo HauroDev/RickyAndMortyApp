@@ -33,5 +33,4 @@ width: 30em;
 display: flex;
 flex-direction: row;
 justify-content: space-between;
-background-color: antiquewhite;
 `;

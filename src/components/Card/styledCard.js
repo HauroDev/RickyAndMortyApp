@@ -19,11 +19,13 @@ export const CloseButton = styled.button`
 `;
 
 export const Container = styled.div`
-  display: flex;
+  display: inline-flex;
   flex-direction: column;
-  justify-content: center;
+  align-items: center;
   width: 10rem;
-  height: auto;
+  height: 15rem;
+  margin: 0.5rem;
+  background-color: aquamarine;
 `;
 
 export const TextInfo = styled.span`
@@ -32,11 +34,15 @@ export const TextInfo = styled.span`
 
 export const ImageCharacter = styled.img`
  width: 5rem;
- height: auto;
 `;
 
 export const FavButton = styled.button`
-  background: none;
-  border: none;
+  background-color: coral;
+  border: 3px solid red;
+  border-radius: 100%;
 
+  &:hover {
+    border: 3px solid coral;
+    background-color: crimson;
+  }
 `;

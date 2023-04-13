@@ -5,7 +5,7 @@ const colorButtom = '#007bff';
 
 export const NavBar = styled.nav`
   background-color: rgb(100,250,50);
-  display: flex;
+  display: inline-flex;
   justify-content: space-between;
   height: 5em;
 `;
@@ -31,9 +31,5 @@ export const NavLinkStyled = styled(NavLink)`
 `;
 
 export const Container = styled.div`
-width: 20em;
-display: flex;
-flex-direction: row;
-justify-content: space-between;
-background-color: antiquewhite;
+width: 28rem;
 `;

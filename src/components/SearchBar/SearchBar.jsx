@@ -1,7 +1,7 @@
 import { useState } from "react";
 import { Button, Container, Input } from "./styledSearchBar";
 
-export default function SearchBar({ onSearch , ramdom}) {
+export default function SearchBar({ onSearch, ramdom }) {
 
   const [id, setId] = useState('');
 
@@ -12,7 +12,7 @@ export default function SearchBar({ onSearch , ramdom}) {
   return (
     <Container>
       <Input type='search' onChange={handleChange} value={id} />
-      <Button onClick={() => {onSearch(id); setId('');}}>Agregar</Button>
+      <Button onClick={() => { onSearch(id); setId(''); }}>Agregar</Button>
       <Button onClick={ramdom}>Ramdom</Button>
     </Container>
   );
