@@ -28,7 +28,7 @@ const reducer = (state = initialState, action) => {
         myFavorites: filteredCharactersFav
       }
     case ORDER:
-      const sortCharactersFav = [...state.allCharactersFav]
+      const sortCharactersFav = [...state.myFavorites]
         .sort((a, b) => {
           switch (action.payload.toUpperCase()) {
             case 'A': return a.id - b.id;
