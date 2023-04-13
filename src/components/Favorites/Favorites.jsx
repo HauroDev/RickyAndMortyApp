@@ -23,7 +23,7 @@ const Favorites = ({ myFavorites }) => {
 
   const handleOrder = (event) => {
     dispatch(orderCards(event.target.value));
-    setAux(!aux);
+    setAux(true); // no es un toggle
   };
 
   const handleFilter = (event) => {
