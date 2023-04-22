@@ -1,6 +1,6 @@
 import { Link } from 'react-router-dom';
 import { CloseButton, Container, FavButton, ImageCharacter, TextInfo } from './styledCard';
-import { addfav, removeFav } from '../../redux/actions';
+import { addFav, removeFav } from '../../redux/actions';
 import { connect } from 'react-redux';
 import { useEffect, useState } from 'react';
 
@@ -51,7 +51,7 @@ const mapStateToProps = (state) => {
 }
 const mapDispatchToProps = (dispatch) => {
   return {
-    addFav: (character) => { dispatch(addfav(character)) },
+    addFav: (character) => { dispatch(addFav(character)) },
     removeFav: (id) => { dispatch(removeFav(id)) }
   }
 }

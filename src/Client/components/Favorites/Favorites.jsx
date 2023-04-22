@@ -5,6 +5,7 @@ import { filterCards, orderCards } from "../../redux/actions";
 import { useState } from "react";
 
 const Favorites = ({ myFavorites }) => {
+  // eslint-disable-next-line no-unused-vars
   const [aux, setAux] = useState(false);
 
   const favCards = myFavorites?.map((character) => {

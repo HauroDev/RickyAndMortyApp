@@ -1,0 +1,10 @@
+.detail-container {
+  background-color: bisque;
+  margin: 0 auto;
+  padding: 2cm;
+}
+
+.detail-container img {
+  border: 10px solid blueviolet;
+  border-radius: 20px 30px 60px;
+}

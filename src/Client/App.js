@@ -2,7 +2,7 @@ import { FlexContainer } from './styledApp';
 import Cards from './components/Cards/Cards';
 import Nav from './components/Nav/Nav';
 import About from './components/About';
-import Detail from './components/Detail';
+import Detail from './components/Detail/Detail';
 import Form from './components/Form/Form';
 import Error from './components/Error';
 import { useState, useEffect } from 'react';
@@ -12,10 +12,13 @@ import Favorites from './components/Favorites/Favorites';
 import { useDispatch } from 'react-redux';
 import { removeFav } from './redux/actions';
 
+// eslint-disable-next-line no-unused-vars
 const URL_BASE = 'https://be-a-rym.up.railway.app/api/character';
+// eslint-disable-next-line no-unused-vars
 const API_KEY = '1cfff7d1d18d.0db22fcc014bfd364d71';
 const max_characters = 826;
-const ramdom = () => Math.floor(Math.random() * (max_characters + 1));
+// const max_characters = 5;
+const ramdom = () => Math.floor(Math.random() * (max_characters) + 1);
 
 function App() {
   const location = useLocation();
@@ -27,40 +30,46 @@ function App() {
     !access && navigate('/');
   }, [access, navigate]);
 
-  const [EMAIL, PASSWORD] = ["hectorma208@gmail.com", "Hector12"];
   const login = (userData) => {
-    if (userData.password === PASSWORD && userData.email === EMAIL) {
-      setAccess(true);
-      navigate('/home');
-    }
-  };
+    const { email, password } = userData;
+    const URL = 'http://localhost:3001/rickandmorty/login/';
+    axios(URL + `?email=${email}&password=${password}`)
+      .then(({ data }) => {
+        const { access } = data;
+        setAccess(data);
+        access && navigate('/home');
+      });
+  }
+
   const logout = () => {
     setAccess(false);
   };
 
   const onSearch = (id) => {
-    axios(`${URL_BASE}/${id}?key=${API_KEY}`)
+    // axios(`${URL_BASE}/${id}?key=${API_KEY}`)
+    axios(`http://localhost:3001/rickandmorty/character/${id}`)
       .then(({ data }) => {
         if (characters.find((element) => element.id === id))
           window.alert('¡Este personaje ya esta a la vista!');
         else if (data.name) {
+          console.log(data.name)
           setCharacters((oldChars) => [...oldChars, data]);
-        } else {
-          window.alert('¡Ingrese algun valor!');
         }
+
+      }).catch(error => {
+        console.error(error.message)
+        window.alert('¡Ingrese algun valor!');
       });
   }
 
   const agregarRamdom = (event, intentos = 0) => {
 
-    // esto funciona pero aun me falta ver que pasa con los favoritos,
-    // pero puede que esto lo arregle sin que me de cuenta
     let id = ramdom();
     if (intentos > max_characters) {
       alert(`Ya estan los ${max_characters} personajes`);
       return null;
     }
-    if (characters.some(character => character.id.includes('' + id)))
+    if (characters.some(character => character.id === ""+id))
       return agregarRamdom(null, intentos + 1);
 
     onSearch(id);
