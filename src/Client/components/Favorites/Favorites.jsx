@@ -18,7 +18,7 @@ const Favorites = ({ myFavorites }) => {
       gender={character.gender}
       origin={character.origin}
       image={character.image} />)
-  });
+  }); // esto esta mal, crea un modulo de componente
 
   const dispatch = useDispatch();
 

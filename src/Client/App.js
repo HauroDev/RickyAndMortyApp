@@ -30,36 +30,43 @@ function App() {
     !access && navigate('/');
   }, [access, navigate]);
 
-  const login = (userData) => {
+  const login = async (userData) => {
     const { email, password } = userData;
     const URL = 'http://localhost:3001/rickandmorty/login/';
-    axios(URL + `?email=${email}&password=${password}`)
-      .then(({ data }) => {
-        const { access } = data;
-        setAccess(data);
-        access && navigate('/home');
-      });
+    try {
+      const response = await axios(URL + `?email=${email}&password=${password}`)
+      const { data } = response
+      const { access } = data;
+      setAccess(data);
+      access && navigate('/home');
+    } catch (error) {
+      console.error(error)
+      window.alert('Usuario/Contraseña incorrecta')
+    }
+
   }
 
   const logout = () => {
     setAccess(false);
   };
 
-  const onSearch = (id) => {
-    // axios(`${URL_BASE}/${id}?key=${API_KEY}`)
-    axios(`http://localhost:3001/rickandmorty/character/${id}`)
-      .then(({ data }) => {
-        if (characters.find((element) => element.id === id))
-          window.alert('¡Este personaje ya esta a la vista!');
-        else if (data.name) {
-          console.log(data.name)
-          setCharacters((oldChars) => [...oldChars, data]);
-        }
+  const onSearch = async (id) => {
+    try {
+      const response = await axios(`http://localhost:3001/rickandmorty/character/${id}`)
+      const { data } = response
 
-      }).catch(error => {
-        console.error(error.message)
-        window.alert('¡Ingrese algun valor!');
-      });
+      if (characters.some((element) => element.id === id))
+        window.alert('¡Este personaje ya esta a la vista!')
+
+      console.log(response)
+      setCharacters((oldChars) => [...oldChars, data])
+
+    } catch ({ response: { status } }) {
+      if (status === 300)
+        window.alert('¡Ingrese valores numéricos!');
+      if (status === 500)
+        window.alert('Personaje no existente')
+    }
   }
 
   const agregarRamdom = (event, intentos = 0) => {
@@ -69,7 +76,7 @@ function App() {
       alert(`Ya estan los ${max_characters} personajes`);
       return null;
     }
-    if (characters.some(character => character.id === ""+id))
+    if (characters.some(character => character.id === "" + id))
       return agregarRamdom(null, intentos + 1);
 
     onSearch(id);

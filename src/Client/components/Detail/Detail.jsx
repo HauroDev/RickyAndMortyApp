@@ -4,18 +4,18 @@ import { useState, useEffect } from "react";
 import './Detail.css'
 
 // eslint-disable-next-line no-unused-vars
-const URL_BASE = 'https://be-a-rym.up.railway.app/api/character';
-// eslint-disable-next-line no-unused-vars
-const API_KEY = '1cfff7d1d18d.0db22fcc014bfd364d71';
+const URL_BASE = 'http://localhost:3001/rickandmorty/character';
 
 const Detail = () => {
   const { id } = useParams();
 
   const [character, setCharacter] = useState({});
 
+  console.log('mount')
+  
   useEffect(() => {
-    // axios(`${URL_BASE}/${id}?key=${API_KEY}`)
-    axios(`http://localhost:3001/rickandmorty/character/${id}`)
+    console.log('mount: useEffect')
+    axios(`${URL_BASE}/${id}`)
       .then(({ data }) => {
         if (data.name) {
           setCharacter(data);
