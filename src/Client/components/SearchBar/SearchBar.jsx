@@ -1,23 +1,22 @@
-import { useState } from "react";
-import { Button, Container, Input } from "./styledSearchBar";
+import { useState } from 'react'
+import { Button, Input } from './styledSearchBar'
 
 export default function SearchBar({ onSearch, ramdom }) {
-
-  const [id, setId] = useState('');
+  const [id, setId] = useState('')
 
   const handleChange = (event) => {
-    setId(event.target.value);
-  };
+    setId(event.target.value)
+  }
   const handleClick = () => {
-    onSearch(id);
-    setId('');
+    onSearch(id)
+    setId('')
   }
 
   return (
-    <Container>
-      <Input type='search' onChange={handleChange} value={id} />
+    <>
+      <Input type='text' onChange={handleChange} value={id} />
       <Button onClick={handleClick}>Agregar</Button>
       <Button onClick={ramdom}>Ramdom</Button>
-    </Container>
-  );
+    </>
+  )
 }

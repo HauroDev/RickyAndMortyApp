@@ -1,9 +1,9 @@
 import styled from "styled-components";
 
 export const Container = styled.div`
-  display: inline-flex;
-  justify-content: space-evenly;
-  align-items: flex-start;
-  align-content: center;
+  display: flex;
   flex-flow: row wrap;
+  justify-content: start;
+  padding: 3rem;
+  padding-top: 1rem;
 `;

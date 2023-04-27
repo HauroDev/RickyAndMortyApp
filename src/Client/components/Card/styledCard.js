@@ -1,6 +1,7 @@
-import styled from "styled-components";
+import styled from 'styled-components'
 
 export const CloseButton = styled.button`
+  display: block;
   border-radius: 100%;
   background-color: red;
   color: white;
@@ -8,41 +9,52 @@ export const CloseButton = styled.button`
   width: 30px;
   height: 30px;
 
-  /* float: right; */
-
+  text-align: left;
   transition: background-color 0.5s;
 
   &:hover {
     background-color: coral;
     border-color: orange;
   }
-`;
-
-export const Container = styled.div`
-  display: inline-flex;
-  flex-direction: column;
-  align-items: center;
-  width: 10rem;
-  height: 15rem;
-  margin: 0.5rem;
-  background-color: aquamarine;
-`;
+`
 
 export const TextInfo = styled.span`
-  font-size: small;
-`;
+  font-size: normal;
+`
 
 export const ImageCharacter = styled.img`
- width: 5rem;
-`;
+  border: 3px solid green;
+  border-radius: 10px;
+  width: 7rem;
+`
 
-export const FavButton = styled.button`
+export const FavButton = styled(CloseButton)`
   background-color: coral;
   border: 3px solid red;
   border-radius: 100%;
+  text-align: center;
 
   &:hover {
     border: 3px solid coral;
     background-color: crimson;
   }
-`;
+`
+
+export const ContainerButtons = styled.div`
+  display: flex;
+  
+`
+export const Container = styled.div`
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin: 0.2rem;
+  padding-top: 0.5rem;
+
+  width: 10rem;
+  height: 15rem;
+
+  background-color: aquamarine;
+  border: 3px solid green;
+  border-radius: 10px;
+`
