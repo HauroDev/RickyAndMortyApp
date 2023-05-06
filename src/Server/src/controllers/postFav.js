@@ -14,7 +14,7 @@ const postFav = async (req, res) => {
       'gender'
     ]
 
-    if (!isPropertys(atributtes,await req.body))
+    if (!isPropertys(atributtes,req.body))
       return res.status(401).json({ message: 'Faltan Datos' })
 
     await Favorite.create({ ...req.body }) // no se si es necesario usar un spreen operator
