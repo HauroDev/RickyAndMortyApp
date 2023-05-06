@@ -33,7 +33,7 @@ function Card({
         setIsFav(true)
       }
     }
-  }, [myFavorites, id])
+  }, [myFavorites])
 
   const handleFavorite = () => {
     if (isFav) {

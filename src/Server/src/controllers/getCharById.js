@@ -1,15 +1,14 @@
 const axios = require('axios')
 
 // eslint-disable-next-line no-unused-vars
-const URL_BASE = 'https://be-a-rym.up.railway.app/api/character';
+const URL_BASE = 'https://be-a-rym.up.railway.app/api/character'
 // eslint-disable-next-line no-unused-vars
-const API_KEY = '1cfff7d1d18d.0db22fcc014bfd364d71';
+const API_KEY = '1cfff7d1d18d.0db22fcc014bfd364d71'
 
 const getCharById = async (req, res) => {
   try {
     const { id } = req.params
-
-    const { data } = await axios(`${URL_BASE}/${id}?key=${API_KEY}`)
+    const { data } = await axios(`https://rickandmortyapi.com/api/character/${id}`)
 
     const char = {
       id: id,
@@ -24,9 +23,8 @@ const getCharById = async (req, res) => {
     res.status(200).json(char)
   } catch (error) {
     const { error: message } = error.response.data
-    error.response.status === 404
-      ? res.status(404)
-      : res.status(500)
+    console.log(error.response.status)
+    error.response.status === 404 ? res.status(404) : res.status(500)
 
     res.send(message)
   }

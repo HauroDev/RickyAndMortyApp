@@ -5,6 +5,7 @@ const { Favorite } = require('../db/DB_connection.js')
 const postFav = async (req, res) => {
   try {
     const atributtes = [
+      'id',
       'name',
       'origin',
       'status',
@@ -13,7 +14,7 @@ const postFav = async (req, res) => {
       'gender'
     ]
 
-    if (!isPropertys(atributtes, req.body))
+    if (!isPropertys(atributtes,await req.body))
       return res.status(401).json({ message: 'Faltan Datos' })
 
     await Favorite.create({ ...req.body }) // no se si es necesario usar un spreen operator
